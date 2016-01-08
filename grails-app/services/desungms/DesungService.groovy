@@ -20,6 +20,7 @@ class DesungService {
 	def excelImportService
 	def imageUploadService
 	
+	//Map to link excel column to the domain values
 	static Map CONFIG_DESUUNG_COLUMN_MAPS = [
 		sheet: 'Desuups',
 		startRow: 1,
@@ -41,6 +42,7 @@ class DesungService {
 			]
 		]
 	
+	//enforce property type for CID, or else it gets converted to scientific notation
 	static Map CONFIG_PROPERTY_TYPE = [
 		citizenID: ([expectedType: ExpectedPropertyType.StringType, defaultValue:""])
 		]
