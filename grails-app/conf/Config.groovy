@@ -117,6 +117,7 @@ environments {
     }
 }
 
+
 // log4j configuration
 log4j.main = {
     // Example of changing the log pattern for the default console appender:
@@ -151,16 +152,10 @@ bi.Desung = [
 ]
 
 
-
-
-
-
-
-
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'desungms.AdminUser'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'desungms.AdminUserAdminRole'
-grails.plugin.springsecurity.authority.className = 'desungms.AdminRole'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'desungms.auth.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'desungms.auth.UserRole'
+grails.plugin.springsecurity.authority.className = 'desungms.auth.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                ['permitAll'],
 	'/index':           ['permitAll'],
@@ -169,6 +164,14 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':        ['permitAll'],
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll']
+	'/**/favicon.ico':  ['permitAll'],
+	'/user/**':     	['ROLE_ADMIN'],
+	 '/role/**':    	['ROLE_ADMIN'],
+	 '/securityInfo/**':     ['ROLE_ADMIN'],
+	 '/registationCode/**':     ['ROLE_ADMIN'],
+	 '/dbconsole': 		['ROLE_ADMIN']
 ]
+grails.plugin.springsecurity.logout.postOnly = false// allows logout through GET
+
+
 

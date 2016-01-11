@@ -1,16 +1,14 @@
 import java.util.Date;
-
-import desungms.AdverseReportType
-import desungms.SocialWorkType
-import desungms.Desung
+import desungms.*;
+import desungms.auth.*;
 
 class BootStrap {
 
     def init = { servletContext ->
-		/*def desup1 = new Desung(
-			desungId: "1234",
-			name: "Kinley Tsherng",
-			citizenID: "11300234325",
+		def desup1 = new Desung(
+			 desungId: "1234",
+			 name: "Kinley Tsherng",
+			 citizenID: "11300234325",
 			 gender: "Male",
 			 contactNumber: "1235678", 
 			 inCountry: "Yes",
@@ -74,7 +72,7 @@ class BootStrap {
 		desup1.save(failOnError: true)
 		desup2.save(failOnError: true)
 		desup3.save(failOnError: true)
-		desup4.save(failOnError: true) */
+		desup4.save(failOnError: true) 
 		
 		def drugs = new AdverseReportType(name: "Drugs")
 		def robbery = new AdverseReportType(name: "Robbery")
@@ -97,6 +95,21 @@ class BootStrap {
 		awareness.save(failOnError: true)
 		crowd.save(failOnError: true)
 		refresh.save(failOnError: true)
+		
+		/*def adminRole = new DesuungRole(authority: 'ROLE_ADMIN').save(flush: true)
+		def userRole = new DesuungRole(authority: 'ROLE_USER').save(flush: true)
+		def testUser = new DesuungUser(username: 'admin', enabled: true, password: 'admin')
+		testUser.save(flush: true)
+	
+		DesuungUserDesuungRole.create testUser, adminRole, true  */
+		def adminRole = Role.findOrSaveWhere(authority:'ROLE_ADMIN')
+		def userRole = Role.findOrSaveWhere(authority:'ROLE_USER')
+		def user = User.findOrSaveWhere(username:'admin',password:'password')
+
+		if(!user.authorities.contains(adminRole)){
+			  UserRole.create(user,adminRole,true)
+		}
+	
     }
     def destroy = {
     }

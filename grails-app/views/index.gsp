@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>${grailsApplication.config.desungPortal.app.fullname}</title>
+		<title>${grailsApplication.config.globalValues.app.fullname}</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -78,34 +78,31 @@
 				#page-body h1 {
 					margin-top: 0;
 				}
+				
+				#front {
+					margin: 20px;
+					padding: 10px;
+					
+				}
 			}
 			
 		</style>
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		
+		<div role="navigation">
+			<g:render template="/layouts/menu"/>
+		</div>
+		<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+		</g:if>
 
-		<div id="page-body" role="main">
-
-				<form method="POST" action="${resource(file: '')}">
-				  <table>
-				    <tr>
-				      <td>Username:</td><td><g:textField name="j_username"/></td>
-				    </tr>
-				    <tr>
-				      <td>Password:</td><td><input name="j_password" type="password"/></td>
-				    </tr>
-				    <tr>
-				      <td colspan="2"><g:submitButton name="login" value="Login"/></td>
-				    </tr>
+		<div role="main" id="front">
+				<h2>Welcome to ${grailsApplication.config.globalValues.app.fullname}</h2>
 				
-				  </table>				
-				</form>
+				<p>Something about de-suung and alllll</p>
 
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				
-			</div>
 		</div>
 	</body>
 </html>

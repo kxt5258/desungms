@@ -1,11 +1,12 @@
 package desungms
 
 
-
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
 
+@Secured('ROLE_ADMIN')
 @Transactional(readOnly = true)
 class DesungController {
 	
@@ -19,6 +20,7 @@ class DesungController {
         respond Desung.list(params), model:[desungInstanceCount: Desung.count()]
     }
 
+	@Secured(['permitAll']) 
     def show(Desung desungInstance) {
         respond desungInstance
     }
@@ -117,7 +119,8 @@ class DesungController {
         }
     }
 	
-	def searchResult= {
+	@Secured(['permitAll'])
+	def searchResult() {
 		def desungs = Desung.findByDesungId(params.desungId);
 		if(desungs) {
 			respond desungs, view:'show'
@@ -128,7 +131,8 @@ class DesungController {
 		}
 	}
 	
-	def search={}
+	@Secured(['permitAll'])
+	def search() {}
 	
 	def sortDesuups = {
 		def desungs = desungService.sortDesunps(params);
@@ -141,7 +145,8 @@ class DesungController {
 		respond desungs, view:'index', model:params
 	}
 	
-	def downloadPdf = {
+	@Secured(['permitAll'])
+	def downloadPdf() {
 		def desungs = Desung.findByDesungId(params.id);
 		desungService.downloadPdf(desungs, response, this);
 	}
