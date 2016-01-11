@@ -155,3 +155,20 @@ bi.Desung = [
 
 
 
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'desungms.AdminUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'desungms.AdminUserAdminRole'
+grails.plugin.springsecurity.authority.className = 'desungms.AdminRole'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll']
+]
+

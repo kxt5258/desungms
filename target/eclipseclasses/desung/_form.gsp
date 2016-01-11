@@ -29,12 +29,11 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: desungInstance, field: 'citizenID', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: desungInstance, field: 'citizenID', 'error')} ">
 	<label for="citizenID">
 		<g:message code="desung.citizenID.label" default="Citizen Id" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="citizenID" length="15" required="" value="${desungInstance?.citizenID}"/>
+	<g:textField name="citizenID" length="15" value="${desungInstance?.citizenID}"/>
 
 </div>
 

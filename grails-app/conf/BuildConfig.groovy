@@ -66,13 +66,15 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
-		//compile "org.grails.plugins:spring-security-core:2.0.0"
 		
 		//Plugins
 		compile ':excel-import:1.1.0.BUILD-SNAPSHOT'
 		compile "org.grails.plugins:excel-export:0.2.1"
 		compile "org.grails.plugins:wkhtmltopdf:0.1.10"
 		compile "org.grails.plugins:burning-image:0.5.2"
+		
+		//Security Plugins
+		compile "org.grails.plugins:spring-security-core:2.0.0"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
