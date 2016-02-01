@@ -157,19 +157,18 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'desungms.auth.Use
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'desungms.auth.UserRole'
 grails.plugin.springsecurity.authority.className = 'desungms.auth.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                ['permitAll'],
-	'/index':           ['permitAll'],
-	'/index.gsp':       ['permitAll'],
-	'/assets/**':       ['permitAll'],
-	'/**/js/**':        ['permitAll'],
-	'/**/css/**':       ['permitAll'],
-	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll'],
-	'/user/**':     	['ROLE_ADMIN'],
-	 '/role/**':    	['ROLE_ADMIN'],
-	 '/securityInfo/**':     ['ROLE_ADMIN'],
+	'/':                		['permitAll'],
+	'/index':          			['permitAll'],
+	'/index.gsp':       		['permitAll'],
+	'/assets/**':       		['permitAll'],
+	'/**/js/**':        		['permitAll'],
+	'/**/css/**':       		['permitAll'],
+	'/**/images/**':    		['permitAll'],
+	'/dbContainerImage/**':  	['permitAll'],
+	'/**/favicon.ico':  		['permitAll'],
+	 '/securityInfo/**':     	['ROLE_ADMIN'],
 	 '/registationCode/**':     ['ROLE_ADMIN'],
-	 '/dbconsole': 		['ROLE_ADMIN']
+	 '/dbconsole': 				['ROLE_ADMIN']
 ]
 grails.plugin.springsecurity.logout.postOnly = false// allows logout through GET
 

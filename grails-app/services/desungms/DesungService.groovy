@@ -96,6 +96,9 @@ class DesungService {
 			def profile = null
 			if(desuupParams['citizenID']) {
 				profile = this.getMultiPartFile(new URL("https://www.citizenservices.gov.bt/G2CCIDImageService/ImageServlet?type=PH&cidNo=" + desuupParams['citizenID']))
+				if(!profile) {
+					profile = this.getMultiPartFile(new URL("http://berms.election-bhutan.org.bt/eagency/MemberPhoto.ashx?_CID=" + desuupParams['citizenID']))
+				}
 			}
 
 			def desungInstance = new Desung(desuupParams);

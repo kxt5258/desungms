@@ -19,11 +19,18 @@
 			</g:if>
 			<g:render template="showDesups" />
 			<g:form url="[resource:desungInstance, action:'delete']" method="DELETE">
+				<sec:ifLoggedIn>
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${desungInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 					<g:link class="download" action="downloadPdf" id="${desungInstance.desungId}.pdf">Download</g:link>
 				</fieldset>
+				</sec:ifLoggedIn>
+				<sec:ifNotLoggedIn>
+				<fieldset class="buttons">
+					<g:link class="download" action="downloadPdf" id="${desungInstance.desungId}.pdf">Download</g:link>
+				</fieldset>
+				</sec:ifNotLoggedIn>
 			</g:form>
 		</div>
 	</body>

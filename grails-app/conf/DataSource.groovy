@@ -1,7 +1,8 @@
 dataSource {
     pooled = true
     jmxExport = true
-    driverClassName = "org.h2.Driver"
+	driverClassName = "com.mysql.jdbc.Driver"
+	dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
     username = "sa"
     password = ""
 }
@@ -18,20 +19,27 @@ hibernate {
 environments {
     development {
         dataSource {
+			driverClassName = "org.h2.Driver"
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+			username = "sa"
+			password = ""
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+            url = "jdbc:mysql://localhost/dmis?useUnicode=yes&characterEncoding=UTF-8"
+			username = "dmis"
+			password = ""
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+            url = "jdbc:mysql://localhost:8889/dmis?useUnicode=yes&characterEncoding=UTF-8"
+			username = "root"
+			password = "root"
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true

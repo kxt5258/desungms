@@ -1,5 +1,13 @@
 
 <div id='cssmenu'>
+<sec:ifNotLoggedIn>
+<ul>
+	<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+	<li><g:link class="searchdesup" controller="Desung" action="search">Search Desuup</g:link></li>
+	<li class='last'><g:link class="list" controller="login">Login</g:link></li>
+</ul>
+</sec:ifNotLoggedIn>
+<sec:ifLoggedIn>
 <ul>
 	<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 	<li><g:link class="list" controller="Desung" action="index">List Desuup</g:link></li>
@@ -11,6 +19,9 @@
 		</ul>
 	</li>
 	<li><g:link class="searchdesup" controller="Desung" action="uploadExcel">Upload</g:link></li>
-	<li class='last'><g:link class="searchdesup" controller="Desung" action="search">Search Desuup</g:link></li>
+	<li><g:link class="searchdesup" controller="Desung" action="search">Search Desuup</g:link></li>
+	<li class='last'><g:link class="list" controller="logout">Logout</g:link></li>
 </ul>
+</sec:ifLoggedIn>
+
 </div>

@@ -5,7 +5,7 @@ import desungms.auth.*;
 class BootStrap {
 
     def init = { servletContext ->
-		def desup1 = new Desung(
+		/*Desung.findOrSaveWhere(
 			 desungId: "1234",
 			 name: "Kinley Tsherng",
 			 citizenID: "11300234325",
@@ -20,7 +20,7 @@ class BootStrap {
 			 permenantAddress:"sdkjskjdskj",
 			 alive:"Alive"
 			)
-		def desup2 = new Desung(
+		Desung.findOrSaveWhere(
 			desungId: "5434535",
 			name: "Sonam Pelden",
 			citizenID: "4543222245",
@@ -33,9 +33,10 @@ class BootStrap {
 			 presentAddress:"sjdjsjds",
 			 presentDzongkhag:"Trongsa",
 			 permenantAddress:"sdkjskjdskj",
-			 alive:"Alive"
+			 alive:"Alive",
+			 remarks:"She dropped halfway because of family issues"
 			)
-		def desup3 = new Desung(
+		Desung.findOrSaveWhere(
 			desungId: "543443535",
 			name: "RINCHEN Pelzang",
 			citizenID: "45676545678",
@@ -52,7 +53,7 @@ class BootStrap {
 			 permenantAddress:"sdkjskjdskj",
 			 alive:"Dead"
 			)
-		def desup4 = new Desung(
+		Desung.findOrSaveWhere(
 			desungId: "54366764535",
 			name: "Sonam Dorji Dema",
 			citizenID: "55556677654",
@@ -62,39 +63,38 @@ class BootStrap {
 			 dateOfBirth: new Date(),
 			 maritialStatus:"Single",
 			 bloodGroup: "O+",
-			 altContactNumber:"",
 			 email:"khssate@moaf.bt",
 			 presentAddress:"sjdjsjds",
 			 presentDzongkhag:"Thimphu",
 			 permenantAddress:"sdkjskjdskj",
 			 alive:"Alive"
-			)
-		desup1.save(failOnError: true)
+			)*/
+		/*desup1.save(failOnError: true)
 		desup2.save(failOnError: true)
 		desup3.save(failOnError: true)
-		desup4.save(failOnError: true) 
+		desup4.save(failOnError: true) */
 		
-		def drugs = new AdverseReportType(name: "Drugs")
-		def robbery = new AdverseReportType(name: "Robbery")
-		def murder = new AdverseReportType(name: "Murder")
-		def rape = new AdverseReportType(name: "Rape")
-		def violence = new AdverseReportType(name: "Violence")
+		AdverseReportType.findOrSaveWhere(name: "Drugs")
+		AdverseReportType.findOrSaveWhere(name: "Robbery")
+		AdverseReportType.findOrSaveWhere(name: "Murder")
+		AdverseReportType.findOrSaveWhere(name: "Rape")
+		AdverseReportType.findOrSaveWhere(name: "Violence")
 		
-		drugs.save(failOnError: true)
+		/*drugs.save(failOnError: true)
 		robbery.save(failOnError: true)
 		murder.save(failOnError: true)
 		rape.save(failOnError: true)
-		violence.save(failOnError: true)
+		violence.save(failOnError: true) */
 		
-		def drill = new SocialWorkType(name: "Drill")
-		def awareness = new SocialWorkType(name: "Awareness")
-		def crowd = new SocialWorkType(name: "Crowd Control")
-		def refresh = new SocialWorkType(name: "Refresher Course")
+		SocialWorkType.findOrSaveWhere(name: "Drill")
+		SocialWorkType.findOrSaveWhere(name: "Awareness")
+		SocialWorkType.findOrSaveWhere(name: "Crowd Control")
+		SocialWorkType.findOrSaveWhere(name: "Refresher Course")
 		
-		drill.save(failOnError: true)
+		/*drill.save(failOnError: true)
 		awareness.save(failOnError: true)
 		crowd.save(failOnError: true)
-		refresh.save(failOnError: true)
+		refresh.save(failOnError: true) */
 		
 		/*def adminRole = new DesuungRole(authority: 'ROLE_ADMIN').save(flush: true)
 		def userRole = new DesuungRole(authority: 'ROLE_USER').save(flush: true)
@@ -106,11 +106,12 @@ class BootStrap {
 		def userRole = Role.findOrSaveWhere(authority:'ROLE_USER')
 		def user = User.findOrSaveWhere(username:'admin',password:'password')
 
-		if(!user.authorities.contains(adminRole)){
+		if(!user.authorities.contains(adminRole)) {
 			  UserRole.create(user,adminRole,true)
-		}
+		}  
 	
     }
+	
     def destroy = {
     }
 }

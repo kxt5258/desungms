@@ -92,22 +92,17 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div role="navigation">
-			<g:render template="/layouts/submenu"/>
+			<g:render template="/layouts/menu"/>
 		</div>
 		<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
+			<div class="message" role="status">${flash.message}</div>
+		</g:if>
 
 		<div role="main" id="front">
 				<h2>Welcome to ${grailsApplication.config.globalValues.app.fullname}</h2>
 				
 				<p>Something about de-suung and alllll</p>
-				
-				<div> 
-					<sec:ifNotLoggedIn>
-	                        <g:link controller='login'>Login</g:link>
-	                  </sec:ifNotLoggedIn>
-                 </div>
+
 		</div>
 	</body>
 </html>
