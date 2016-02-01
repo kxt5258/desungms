@@ -1,6 +1,6 @@
 package desungms
 
-import grails.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
 import javax.servlet.http.HttpServletResponse
 import pl.touk.excel.export.WebXlsxExporter
 import org.grails.plugins.excelimport.*
@@ -46,7 +46,6 @@ class DesungService {
 	static Map CONFIG_PROPERTY_TYPE = [
 		citizenID: ([expectedType: ExpectedPropertyType.StringType, defaultValue:""])
 		]
-
     def sortDesunps(params) {
 		def alive = params?.alive
 		def dzongkhag = params?.dzongkhag
@@ -87,11 +86,13 @@ class DesungService {
 				);
 	}
 	
+	@Transactional
 	def uploadExcel(def file, HttpServletResponse response) {
 		Workbook workbook = WorkbookFactory.create(file.inputStream) ;
 		def desungList = excelImportService.columns(workbook, CONFIG_DESUUNG_COLUMN_MAPS, null, CONFIG_PROPERTY_TYPE, -1)
 		
 		println "STARTING.........."
+		def errorMessages = []
 		desungList.each { Map desuupParams ->
 			def profile = null
 			if(desuupParams['citizenID']) {
@@ -109,23 +110,24 @@ class DesungService {
 					imageUploadService.save(desungInstance)
 				}
 				else {
-					print "NO IMAGE: " + desuupParams['desungId'] + ": " + desuupParams['name'] 
+					errorMessages << "NO IMAGE: " + desuupParams['desungId'] + ": " + desuupParams['name'] 
 				}
 				
 				if(!desungInstance.save(flush: true)) {
 					desungInstance.errors.allErrors.each {
-						println desuupParams['desungId'] + ": " + desuupParams['name'] + ": "+ it
+						errorMessages << desuupParams['desungId'] + ": " + desuupParams['name'] + ": Check Desuup ID or CID"
 						}
 				}
 			}
 			else {
 				desungInstance.errors.allErrors.each {
-					println desuupParams['desungId'] + ": " + desuupParams['name'] + ": "+ it
+					errorMessages << desuupParams['desungId'] + ": " + desuupParams['name'] + ": Check Desuup ID or CID"
 					}
 			} 
 					
 		} 
 		println "DONE.........."
+		return errorMessages
 	}
 	
 	def getMultiPartFile(URL url) {

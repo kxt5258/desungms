@@ -11,8 +11,10 @@
 		<div role="navigation">
 			<g:render template="/layouts/menu"/>
 		</div>
-		<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
+		<g:if test="${flash.errorMessages}">
+				<div class="message" role="status">
+				     <g:each in="${flash.errorMessages}">${it}<br /></g:each> 
+				</div>
 			</g:if>
 		<div class="searchInterface">
 			<g:form url="[controller:'Desung', action:'uploadExcel']" method="PUT"  enctype="multipart/form-data">

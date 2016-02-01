@@ -154,7 +154,8 @@ class DesungController {
 	def uploadExcel = {
 		//TODO The excel uploads
 		if(params.file) {
-			desungService.uploadExcel(params.file, response);
+			def errorMessage = desungService.uploadExcel(params.file, response);
+			flash.errorMessages = errorMessage
 		}
 	}
 }
