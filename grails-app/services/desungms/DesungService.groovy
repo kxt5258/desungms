@@ -1,3 +1,8 @@
+/**
+ * The service module 
+ * @author kinley tshering
+ * @Date 2015
+ */
 package desungms
 
 import org.springframework.transaction.annotation.Transactional
@@ -15,12 +20,26 @@ import org.apache.commons.io.IOUtils
 class DesungService {
 	
 	static transactional = false
+	
+	/**
+	 * Define the html to pdf converter service
+	 */
 	def wkhtmltoxService
 	def grailsApplication
+	
+	/**
+	 * Define the excel import service, for uploading of excel sheets
+	 */
 	def excelImportService
+	
+	/**
+	 * Define the image upload service, attach profile picture to each domains
+	 */
 	def imageUploadService
 	
-	//Map to link excel column to the domain values
+	/*
+	 * Map to link excel column to the domain values (fields)
+	 */
 	static Map CONFIG_DESUUNG_COLUMN_MAPS = [
 		sheet: 'Desuups',
 		startRow: 1,
@@ -42,10 +61,18 @@ class DesungService {
 			]
 		]
 	
-	//enforce property type for CID, or else it gets converted to scientific notation
+	/**
+	 * enforce property type for CID, or else it gets converted to scientific notation
+	 */
 	static Map CONFIG_PROPERTY_TYPE = [
 		citizenID: ([expectedType: ExpectedPropertyType.StringType, defaultValue:""])
 		]
+	
+	/**
+	 * Sorting the desuups based on the params passed
+	 * @param params parameters used for sorting
+	 * @return desungs map of desuung object
+	 */
     def sortDesunps(params) {
 		def alive = params?.alive
 		def dzongkhag = params?.dzongkhag
@@ -56,7 +83,12 @@ class DesungService {
 		def desungs = Desung.executeQuery(query)
 		return desungs
     }
-	
+	/**
+	 * Download the sorted desuups as excel file
+	 * @param desungs map of desuungs
+	 * @param response the HttpServletResponse object
+	 * @return none
+	 */
 	def downloadExcel(def desungs, HttpServletResponse response) {
 			def headers = ['Desunng Id', 'Citizenship ID', 'Name', 'Date of Birth','Gender', 'Qualification', 'Contact Number', 'Email','Maritial Status','Blood Group',
 				'Permanent Address','Working Address','Present Dzongkhag','Alive', 'Present Country', 'Remarks']
@@ -71,6 +103,13 @@ class DesungService {
 			}		
 	}
 	
+	/**
+	 * Download the desuup profile as pdf file
+	 * @param desungs the Desuung object
+	 * @param response HttpServletResponse
+	 * @param dc DesungController
+	 * @return
+	 */
 	def downloadPdf(def desungs, HttpServletResponse response, DesungController dc) {
 		def values = desungs.properties['biImage']['large']
 		def imageValue= values.toString().substring(values.toString().indexOf(':') + 1).trim();
@@ -86,6 +125,12 @@ class DesungService {
 				);
 	}
 	
+	/**
+	 * Upload the list of desuungs from an excel sheet
+	 * @param file the excel file
+	 * @param response HttpServletResponse
+	 * @return
+	 */
 	@Transactional
 	def uploadExcel(def file, HttpServletResponse response) {
 		Workbook workbook = WorkbookFactory.create(file.inputStream) ;
@@ -130,6 +175,11 @@ class DesungService {
 		return errorMessages
 	}
 	
+	/**
+	 * Download the profile picture from the provided URL
+	 * @param url url of image
+	 * @return image the image of desuup
+	 */
 	def getMultiPartFile(URL url) {
 		File file = new File("test.jpg");
 		FileUtils.copyURLToFile(url, file);
