@@ -160,13 +160,15 @@ class DesungService {
 				
 				if(!desungInstance.save(flush: true)) {
 					desungInstance.errors.allErrors.each {
-						errorMessages << desuupParams['desungId'] + ": " + desuupParams['name'] + ": Check Desuup ID or CID"
+						errorMessages << desuupParams['desungId'] + ": " + desuupParams['name'] + ": Check the values again"
+						println it
 						}
 				}
 			}
 			else {
 				desungInstance.errors.allErrors.each {
-					errorMessages << desuupParams['desungId'] + ": " + desuupParams['name'] + ": Check Desuup ID or CID"
+					errorMessages << desuupParams['desungId'] + ": " + desuupParams['name'] + ": Check the values again"
+					println it
 					}
 			} 
 					

@@ -104,7 +104,8 @@ class BootStrap {
 		DesuungUserDesuungRole.create testUser, adminRole, true  */
 		def adminRole = Role.findOrSaveWhere(authority:'ROLE_ADMIN')
 		def userRole = Role.findOrSaveWhere(authority:'ROLE_USER')
-		def user = User.findOrSaveWhere(username:'admin',password:'password')
+		//def user = User.findOrSaveWhere(username:'admin',password:'password')
+		def user = new User(username: 'admin', enabled: true, password: 'password').save(flush: true)
 
 		if(!user.authorities.contains(adminRole)) {
 			  UserRole.create(user,adminRole,true)
