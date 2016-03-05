@@ -145,7 +145,9 @@ class DesungService {
 				if(!profile) {
 					profile = this.getMultiPartFile(new URL("http://berms.election-bhutan.org.bt/eagency/MemberPhoto.ashx?_CID=" + desuupParams['citizenID']))
 				}
-			}
+			} 
+			
+			desuupParams['email'] = checkEmail(desuupParams['email'])
 
 			def desungInstance = new Desung(desuupParams);
 			
@@ -193,6 +195,22 @@ class DesungService {
 		}
 		else {
 			return null
+		}
+	}
+	
+	
+	/**
+	 * Check the inout email and validate it before uploading
+	 * @param email
+	 * @return valid email or ""
+	 */
+	def checkEmail(def email) {
+		def emailPattern = /[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})/
+		if (email ==~ emailPattern){
+		  return email
+		} 
+		else {
+		    return ""
 		}
 	}
 	
