@@ -40,6 +40,8 @@
 						<g:sortableColumn property="contactNumber" title="${message(code: 'desung.contactNumber.label', default: 'Contact Number')}" />
 					
 						<g:sortableColumn property="email" title="${message(code: 'desung.email.label', default: 'Email Address')}" />
+
+						<g:sortableColumn property="presentDzongkhag" title="${message(code: 'desung.presentDzongkhag.label', default: 'Residence')}" />
 					
 					</tr>
 				</thead>
@@ -55,6 +57,8 @@
 						<td>${fieldValue(bean: desungInstance, field: "contactNumber")}</td>
 					
 						<td>${fieldValue(bean: desungInstance, field: "email")}</td>
+						
+						<td>${fieldValue(bean: desungInstance, field: "presentDzongkhag")}</td>
 					
 					</tr>
 				</g:each>

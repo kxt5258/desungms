@@ -36,7 +36,7 @@ class DesungService {
 	 * Define the image upload service, attach profile picture to each domains
 	 */
 	def imageUploadService
-	
+		
 	/*
 	 * Map to link excel column to the domain values (fields)
 	 */
@@ -144,17 +144,22 @@ class DesungService {
 				profile = this.getMultiPartFile(new URL("https://www.citizenservices.gov.bt/G2CCIDImageService/ImageServlet?type=PH&cidNo=" + desuupParams['citizenID']))
 				if(!profile) {
 					profile = this.getMultiPartFile(new URL("http://berms.election-bhutan.org.bt/eagency/MemberPhoto.ashx?_CID=" + desuupParams['citizenID']))
-				}
+				} 
 			} 
 			
-			desuupParams['email'] = checkEmail(desuupParams['email'])
+			desuupParams['email'] = checkEmail(desuupParams['email'])  
 
 			def desungInstance = new Desung(desuupParams);
 			
 			if(desungInstance.save(flush: false)) {
 				if(profile) {
-					desungInstance.profile = profile;
-					imageUploadService.save(desungInstance)
+						try {
+							desungInstance.profile = profile;
+						    imageUploadService.save(desungInstance)
+						}
+						catch(Exception exc) {
+							return "NO IMAGE: " + desuupParams['desungId'] + ": " + desuupParams['name']
+						} 
 				}
 				else {
 					errorMessages << "NO IMAGE: " + desuupParams['desungId'] + ": " + desuupParams['name'] 
@@ -173,6 +178,12 @@ class DesungService {
 					println it
 					}
 			} 
+			/*def myid = desuupParams['desungId']
+			def connum = desuupParams['citizenID']
+			
+			String query = "update Desung SET citizenID = '${connum}' WHERE desungId = '${myid}'"
+			
+			def desungs = Desung.executeUpdate(query) */
 					
 		} 
 		println "DONE.........."
@@ -187,7 +198,7 @@ class DesungService {
 	def getMultiPartFile(URL url) {
 		File file = new File("test.jpg");
 		FileUtils.copyURLToFile(url, file);
-		if(file.length() > 0)  {
+		if(file.length() > 1)  {
 			FileInputStream input = new FileInputStream(file);
 			MultipartFile multipartFile = new MockMultipartFile("file",
 				file.getName(), "image/jpeg", IOUtils.toByteArray(input));

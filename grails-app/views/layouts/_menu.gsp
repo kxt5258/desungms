@@ -24,14 +24,14 @@
 		</ul>
 	</li>
 	
-	<li class='has-sub'><a href="#">System User</a>
+	<li class='has-sub'><a href="#">Add System User</a>
 		<ul>
 			<li><g:link controller="user" action='search'>Search User</g:link></li>
 			<li><g:link controller="user" action='create'>Create User</g:link></li>
 		</ul>
 	</li>
 	<li><g:link class="searchdesup" controller="Desung" action="uploadExcel">Upload</g:link></li>
-	<li class='last'><g:link controller='logout'>Logout</g:link> (<sec:username/>)</li>
+	<li class='last'><g:link controller='logout'>Logout (<sec:username/>)</g:link></li>
 </ul>
 </sec:ifLoggedIn>
 
