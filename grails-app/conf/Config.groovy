@@ -91,7 +91,7 @@ grails.hibernate.pass.readonly = false
 grails.hibernate.osiv.readonly = false
 
 //wkhtmltopdf binary location
-grails.plugin.wkhtmltox.binary = "/usr/local/bin/wkhtmltopdf"
+grails.plugin.wkhtmltox.binary = "C:/Program Files/wkhtmltopdf.exe"
 grails.cache.enabled = false
 
 //Custom Settings

@@ -90,3 +90,5 @@ Change the contents of conf/DataSource.groovy to reflect the database
 </div>
 ,
 <h2 id="user-content-wkhtmltopdf"></h2>
+
+heapsize: in /etc/default/tomcat7    jdk1.7.0_79

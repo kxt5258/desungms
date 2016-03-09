@@ -21,9 +21,14 @@ class BootStrap {
 		//def userRole = Role.findOrSaveWhere(authority:'ROLE_USER')
 		def user = new User(username: 'admin', enabled: true, password: 'password').save(flush: true)
 
-		/*if(!user.authorities.contains(adminRole)) {
-			  UserRole.create(user,adminRole,true)
-		}  */
+		try {
+			if(!user.authorities.contains(adminRole)) {
+				  UserRole.create(user,adminRole,true)
+			}  
+		}
+		catch(Exception exc) {
+			println "User already linked!"
+		}
 	
     }
 	
