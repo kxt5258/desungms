@@ -7,7 +7,7 @@ De-suung Management Information System (DMIS) is designed to manage the desuups 
 
 3. Tomcat application server
 
-4. JDK7
+4. JDK7 (jdk1.7.0_79)
 
 5. Wkhtmltopdf
 <h2>1. Grails 2.4.4</h2>
